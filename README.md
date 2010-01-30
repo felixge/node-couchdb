@@ -2,7 +2,6 @@
 
 # Todo
 
-* Authentication
 * doc:attachments
 * db:all_dbs
 * db:compact
@@ -12,3 +11,5 @@
 * db:query_views
 * db:view_cleanup
 * db:changes_stream
+* Authentication
+* Write docs
