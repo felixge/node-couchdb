@@ -8,9 +8,7 @@ var
     D: false,
     E: false,
     F: false,
-  },
-
-  client = couchdb.createClient();
+  };
 
 client
   .request('/_uuids')

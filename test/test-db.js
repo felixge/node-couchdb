@@ -21,7 +21,6 @@ var
     L: false,
   },
 
-  client = couchdb.createClient(),
   db = client.db(DB_NAME);
 
 // Cleanup if test crashed in the middle

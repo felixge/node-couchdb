@@ -3,7 +3,6 @@
 # Todo
 
 * doc:attachments
-* db:all_dbs
 * db:compact
 * db:bulk_docs
 * db:temp_view
