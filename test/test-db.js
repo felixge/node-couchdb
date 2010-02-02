@@ -19,6 +19,8 @@ var
     J: false,
     K: false,
     L: false,
+    M: false,
+    N: false,
   },
 
   db = client.db(DB_NAME);
@@ -119,6 +121,28 @@ db
   .addCallback(function(r) {
     callbacks.L = true;
     assert.ok('rows' in r);
+  });
+
+// Test compact
+db
+  .compact()
+  .addCallback(function(r) {
+    callbacks.M = true;
+    assert.ok('ok' in r);
+  });
+
+// Test bulk docs
+db
+  .bulkDocs({
+    docs: [
+      {_id: '1'},
+      {_id: '2'},
+    ]
+  })
+  .addCallback(function(r) {
+    callbacks.N = true;
+    assert.equal('1', r[0].id);
+    assert.equal('2', r[1].id);
   });
 
 process.addListener('exit', function() {
