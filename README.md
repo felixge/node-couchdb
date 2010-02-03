@@ -2,7 +2,8 @@
 
 # Todo
 
-* doc:attachments
+* standalone attachments
+* etags
 * db:changes_stream
 * Authentication
 * Write docs
