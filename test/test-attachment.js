@@ -7,6 +7,7 @@ var
     A: false,
     B: false,
     C: false,
+    D: false,
   },
 
   db = client.db(DB_NAME);
@@ -45,6 +46,13 @@ db
     callbacks.C = true;
     assert.ok(r.ok);
     assert.equal('logo-2', r.id);
+
+    db
+      .removeAttachment('logo-2', 'logo.png', r.rev)
+      .addCallback(function(r) {
+        callbacks.D = true;
+        assert.ok(r.ok);
+      });
   });
 
 process.addListener('exit', function() {
