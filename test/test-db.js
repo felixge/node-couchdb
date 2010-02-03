@@ -27,6 +27,7 @@ var
     R: false,
     S: false,
     T: false,
+    U: false,
   },
 
   db = client.db(DB_NAME);
@@ -66,6 +67,13 @@ db
     callbacks.D = true;
     assert.equal(TEST_ID, r.id);
     assert.ok('rev' in r);
+
+    db
+      .getDoc(TEST_ID)
+      .addCallback(function(doc) {
+        callbacks.U = true;
+        assert.equal(doc.hello, TEST_DOC.hello);
+      });
   });
 
 // Let couch create a document id for us
