@@ -6,6 +6,7 @@ var
   callbacks = {
     A: false,
     B: false,
+    C: false,
   },
 
   db = client.db(DB_NAME);
@@ -33,6 +34,17 @@ couchdb
         assert.ok(r.ok);
         assert.equal('logo-doc', r.id);
       });
+  });
+
+db
+  .saveAttachment(
+    __dirname+'/fixture/logo.png',
+    'logo-2'
+  )
+  .addCallback(function(r) {
+    callbacks.C = true;
+    assert.ok(r.ok);
+    assert.equal('logo-2', r.id);
   });
 
 process.addListener('exit', function() {
