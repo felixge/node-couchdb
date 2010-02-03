@@ -26,6 +26,7 @@ var
     Q: false,
     R: false,
     S: false,
+    T: false,
   },
 
   db = client.db(DB_NAME);
@@ -172,9 +173,9 @@ db
 
 // Test save design doc
 db
-  .saveDesign('rock', {
+  .saveDesign('nice', {
     views: {
-      rock: {
+      one: {
         map: function() {
           emit(null, null)
         }
@@ -184,15 +185,15 @@ db
   .addCallback(function(r) {
     callbacks.Q = true;
     assert.ok('ok' in r);
-    assert.ok('_design/rock', r.id);
+    assert.ok('_design/nice', r.id);
   });
 
 // Try alternative syntax
 db
   .saveDesign({
-    _id: 'super',
+    _id: 'other',
     views: {
-      rock: {
+      example: {
         map: function() {
           emit(null, null)
         }
@@ -202,18 +203,24 @@ db
   .addCallback(function(r) {
     callbacks.R = true;
     assert.ok('ok' in r);
-    assert.ok('_design/super', r.id);
+    assert.ok('_design/other', r.id);
   });
 
 // Test compact on design
 db
-  .compact('rock')
+  .compact('nice')
   .addCallback(function(r) {
     callbacks.S = true;
     assert.ok('ok' in r);
   });
 
-
+// Test view querying
+db
+  .view('nice', 'one', {limit: 1})
+  .addCallback(function(r) {
+    callbacks.T = true;
+    assert.equal(1, r.rows.length);
+  });
 
 process.addListener('exit', function() {
   for (var k in callbacks) {
