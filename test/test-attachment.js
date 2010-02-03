@@ -48,7 +48,5 @@ db
   });
 
 process.addListener('exit', function() {
-  for (var k in callbacks) {
-    assert.ok(callbacks[k], 'Callback '+k+' fired');
-  }
+  checkCallbacks(callbacks);
 });

@@ -77,7 +77,5 @@ db.remove();
 db2.remove();
 
 process.addListener('exit', function() {
-  for (var k in callbacks) {
-    assert.ok(callbacks[k], 'Callback '+k+' fired');
-  }
+  checkCallbacks(callbacks);
 });
