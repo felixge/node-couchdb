@@ -21,6 +21,11 @@ var
     L: false,
     M: false,
     N: false,
+    O: false,
+    P: false,
+    Q: false,
+    R: false,
+    S: false,
   },
 
   db = client.db(DB_NAME);
@@ -145,6 +150,7 @@ db
     assert.equal('2', r[1].id);
   });
 
+// Test temp views
 db
   .tempView({
     map: function() {
@@ -152,8 +158,62 @@ db
     }
   }, {include_docs: true})
   .addCallback(function(r) {
+    callbacks.O = true;
     assert.ok('total_rows' in r);
   });
+
+// Test view cleanup
+db
+  .viewCleanup()
+  .addCallback(function(r) {
+    callbacks.P = true;
+    assert.ok(r.ok);
+  });
+
+// Test save design doc
+db
+  .saveDesign('rock', {
+    views: {
+      rock: {
+        map: function() {
+          emit(null, null)
+        }
+      }
+    }
+  })
+  .addCallback(function(r) {
+    callbacks.Q = true;
+    assert.ok('ok' in r);
+    assert.ok('_design/rock', r.id);
+  });
+
+// Try alternative syntax
+db
+  .saveDesign({
+    _id: 'super',
+    views: {
+      rock: {
+        map: function() {
+          emit(null, null)
+        }
+      }
+    }
+  })
+  .addCallback(function(r) {
+    callbacks.R = true;
+    assert.ok('ok' in r);
+    assert.ok('_design/super', r.id);
+  });
+
+// Test compact on design
+db
+  .compact('rock')
+  .addCallback(function(r) {
+    callbacks.S = true;
+    assert.ok('ok' in r);
+  });
+
+
 
 process.addListener('exit', function() {
   for (var k in callbacks) {
