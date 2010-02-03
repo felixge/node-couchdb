@@ -145,6 +145,16 @@ db
     assert.equal('2', r[1].id);
   });
 
+db
+  .tempView({
+    map: function() {
+      emit(null, null);
+    }
+  }, {include_docs: true})
+  .addCallback(function(r) {
+    assert.ok('total_rows' in r);
+  });
+
 process.addListener('exit', function() {
   for (var k in callbacks) {
     assert.ok(callbacks[k], 'Callback '+k+' fired');
