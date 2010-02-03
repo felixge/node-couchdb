@@ -8,6 +8,7 @@ var
     B: false,
     C: false,
     D: false,
+    E: false,
   },
 
   db = client.db(DB_NAME);
@@ -34,6 +35,13 @@ couchdb
         callbacks.B = true;
         assert.ok(r.ok);
         assert.equal('logo-doc', r.id);
+
+        db
+          .getAttachment('logo-doc', 'logo.png')
+          .addCallback(function(r) {
+            callbacks.E = true;
+            assert.equal(3010, r.length);
+          });
       });
   });
 
