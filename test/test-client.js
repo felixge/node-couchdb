@@ -42,10 +42,11 @@ client
 
 // Get the couch stats
 client
-  .stats()
+  .stats('httpd_status_codes', '200')
   .addCallback(function(r) {
     callbacks.D = true;
-    assert.ok('httpd_status_codes' in r);
+    assert.deepEqual(['httpd_status_codes'], Object.keys(r));
+    assert.deepEqual(['200'], Object.keys(r.httpd_status_codes));
   });
 
 // Find all active tasks

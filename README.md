@@ -1,6 +1,6 @@
 # Node.js CouchDB module
 
-A thin node.js idiom layer for CouchDB's REST API that tries to stay close to the metal.
+A thin node.js idiom based module for [CouchDB's REST API](http://wiki.apache.org/couchdb/HTTP_REST_API) that tries to stay close to the metal.
 
 ## Tutorial
 
@@ -115,6 +115,26 @@ Example:
       query: {count: 5},
       full: true
     });
+
+### client.allDbs()
+
+Wrapper for [`GET /_all_dbs`](http://wiki.apache.org/couchdb/HTTP_database_API#List_Databases).
+
+### client.config()
+
+Wrapper for [`GET /_config`](http://wiki.apache.org/couchdb/API_Cheatsheet).
+
+### client.uuids([count])
+
+Wrapper for [`GET /_uuids`](http://wiki.apache.org/couchdb/API_Cheatsheet). `count` is the number of uuid's you would like CouchDB to generate for you.
+
+### client.replicate(source, target, [options])
+
+Wrapper for [`POST /_replicate`](http://wiki.apache.org/couchdb/Replication). `source` and `target` are references to the databases you want to synchronize, `options` can include additional keys such as `{create_target:true}`.
+
+### client.uuids([group, key])
+
+Wrapper for [`GET /_stats`](http://wiki.apache.org/couchdb/Runtime_Statistics). `group` and `key` can be used to specify limit the stats to fetch.
 
 ## Todo
 
