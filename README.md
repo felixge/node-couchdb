@@ -36,7 +36,7 @@ If you are wondering if there is a race-condition in the above example, the answ
 
 ### couchdb.toJSON(data)
 
-Identical to `JSON.stringify()`, except that function value will be converted to strings like this:
+Identical to `JSON.stringify()`, except that function values will be converted to strings like this:
 
     couchdb.toJSON({
       foo: 'bar',
@@ -61,7 +61,7 @@ node-couchdb uses this function everywhere for query serialization, this helps s
 
 ### couchdb.toAttachment(file)
 
-Takes the path of a `file` and creates an JS object suitable for inline document attachment out of it:
+Takes the path of a `file` and returns a promise that yields a JS object suitable for inline document attachment:
 
     couchdb
       .toAttachment(__filename)
