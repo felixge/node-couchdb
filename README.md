@@ -118,7 +118,7 @@ Example:
 
 ### client.allDbs()
 
-Wrapper for [`GET /_all_dbs`](http://wiki.apache.org/couchdb/HTTP_database_API#List_Databases).
+Wrapper for [GET /_all_dbs](http://wiki.apache.org/couchdb/HTTP_database_API#List_Databases).
 
 ### client.config()
 
