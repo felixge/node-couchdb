@@ -132,7 +132,7 @@ Wrapper for [`GET /_uuids`](http://wiki.apache.org/couchdb/API_Cheatsheet). `cou
 
 Wrapper for [`POST /_replicate`](http://wiki.apache.org/couchdb/Replication). `source` and `target` are references to the databases you want to synchronize, `options` can include additional keys such as `{create_target:true}`.
 
-### client.uuids([group, key])
+### client.stats([group, key])
 
 Wrapper for [`GET /_stats`](http://wiki.apache.org/couchdb/Runtime_Statistics). `group` and `key` can be used to specify limit the stats to fetch.
 
