@@ -184,6 +184,16 @@ Wrapper for [PUT /db-name/doc-id](http://wiki.apache.org/couchdb/HTTP_Document_A
 
 Same as the above, but the `id` can either a property of `doc`, or omitted to let CouchDB generate a uuid for this new document.
 
+### db.removeDoc(id, rev)
+
+Deletes document `id` with `rev` from the db.
+
+### db.copyDoc(srcId, destId, [destRev])
+
+Copies document `srcId` to `destId`. If `destId` already exists, you need to supply `destRev` to overwrite it.
+
+Awesome
+
 ### db.saveDesign(design, doc)
 
 A convenience wrapper for `saveDoc()` that prefixes the document id with `'_design/'+design`. Useful for storing views like this:
