@@ -122,7 +122,7 @@ Wrapper for [GET /\_all\_dbs](http://wiki.apache.org/couchdb/HTTP_database_API#L
 
 ### client.config()
 
-Wrapper for [GET /_\config](http://wiki.apache.org/couchdb/API_Cheatsheet).
+Wrapper for [GET /\_config](http://wiki.apache.org/couchdb/API_Cheatsheet).
 
 ### client.uuids([count])
 
