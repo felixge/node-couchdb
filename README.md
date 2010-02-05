@@ -140,7 +140,25 @@ Wrapper for [GET /\_stats](http://wiki.apache.org/couchdb/Runtime_Statistics). `
 
 Wrapper for [GET /\_active\_tasks](http://wiki.apache.org/couchdb/API_Cheatsheet).
 
+### client.db(name)
 
+Creates a new `couchdb.Db` instance for a database with the given `name`.
+
+### db.name
+
+The name of the db this instance is tied to. READ-ONLY property
+
+### db.client
+
+A reference to the `couchdb.Client` this instance is tied to. READ-ONLY property
+
+### db.request(options)
+
+Same as `client.request`, but the `path` option gets automatically prefixed by `'/<db.name>'`.
+
+### db.exists()
+
+Returns a promise that yields a boolean indicating whether this db exists or not.
 
 ## Todo
 
