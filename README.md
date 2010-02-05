@@ -225,6 +225,22 @@ Delete attachment `attachmentId` from doc `docId` with `docRev`.
 
 Loads the attachment `attachmentId` from `docId`. The returned promise yields the binary content of the attachment. There is no streaming, don't use this with large files.
 
+### db.allDocs(query)
+
+Wrapper for [GET /db-name/\_all\_docs](http://wiki.apache.org/couchdb/HTTP_Document_API#All_Documents). `query` allows to specify options for this view.
+
+### db.allDocsBySeq(query)
+
+Wrapper for [GET /db-name/\_all\_docs\_by\_seq](http://wiki.apache.org/couchdb/HTTP_Document_API#all_docs_by_seq).
+
+### db.compact(design)
+
+Wrapper for [POST /db-name/\_compact/design-name](http://wiki.apache.org/couchdb/http://wiki.apache.org/couchdb/HTTP_view_API#View_Compaction). `design` provides the name of the design to invoke compact for.
+
+### db.bulkDocs(data)
+
+Wrapper for [POST /db-name/\_bulk_docs](http://wiki.apache.org/couchdb/HTTP_Bulk_Document_API#Modify_Multiple_Documents_With_a_Single_Request).
+
 ## Todo
 
 * Authentication
