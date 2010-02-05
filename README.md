@@ -118,23 +118,29 @@ Example:
 
 ### client.allDbs()
 
-Wrapper for [GET /_all_dbs](http://wiki.apache.org/couchdb/HTTP_database_API#List_Databases).
+Wrapper for [GET /\_all\_dbs](http://wiki.apache.org/couchdb/HTTP_database_API#List_Databases).
 
 ### client.config()
 
-Wrapper for [GET /_config](http://wiki.apache.org/couchdb/API_Cheatsheet).
+Wrapper for [GET /_\config](http://wiki.apache.org/couchdb/API_Cheatsheet).
 
 ### client.uuids([count])
 
-Wrapper for [GET /_uuids](http://wiki.apache.org/couchdb/API_Cheatsheet). `count` is the number of uuid's you would like CouchDB to generate for you.
+Wrapper for [GET /\_uuids](http://wiki.apache.org/couchdb/API_Cheatsheet). `count` is the number of uuid's you would like CouchDB to generate for you.
 
 ### client.replicate(source, target, [options])
 
-Wrapper for [POST /_replicate](http://wiki.apache.org/couchdb/Replication). `source` and `target` are references to the databases you want to synchronize, `options` can include additional keys such as `{create_target:true}`.
+Wrapper for [POST /\_replicate](http://wiki.apache.org/couchdb/Replication). `source` and `target` are references to the databases you want to synchronize, `options` can include additional keys such as `{create_target:true}`.
 
 ### client.stats([group, key])
 
-Wrapper for [GET /_stats](http://wiki.apache.org/couchdb/Runtime_Statistics). `group` and `key` can be used to specify limit the stats to fetch.
+Wrapper for [GET /\_stats](http://wiki.apache.org/couchdb/Runtime_Statistics). `group` and `key` can be used to limit the stats to fetch.
+
+### client.activeTasks()
+
+Wrapper for [GET /\_active\_tasks](http://wiki.apache.org/couchdb/API_Cheatsheet).
+
+
 
 ## Todo
 
