@@ -184,6 +184,36 @@ Wrapper for [PUT /db-name/doc-id](http://wiki.apache.org/couchdb/HTTP_Document_A
 
 Same as the above, but the `id` can either a property of `doc`, or omitted to let CouchDB generate a uuid for this new document.
 
+### db.saveDesign(design, doc)
+
+A convenience wrapper for `saveDoc()` that prefixes the document id with `'_design/'+design`. Useful for storing views like this:
+
+    db
+      .saveDesign('my-design', {
+        views: {
+          "my-view": {
+            map: function() {
+              emit(null, null)
+            }
+          }
+        }
+      })
+
+### db.saveAttachment(file, docId, options)
+
+Attaches a `file` to a given `docId`. Available `options`:
+
+* `name`: The name of the attachment. (default: `path.basename(file)`)
+* `contentType`: The content type to associate with this attachment (default: see `dep/mime.js`)
+* `rev`: If the `docId` already exists, you have to supply its current revision.
+
+### db.removeAttachment(docId, attachmentId, docRev)
+
+Delete attachment `attachmentId` from doc `docId` with `docRev`.
+
+### db.getAttachment(docId, attachmentId)
+
+Loads the attachment `attachmentId` from `docId`. The returned promise yields the binary content of the attachment. There is no streaming, don't use this with large files.
 
 ## Todo
 
