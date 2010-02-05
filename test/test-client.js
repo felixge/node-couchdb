@@ -13,6 +13,7 @@ var
     D: false,
     E: false,
     F: false,
+    G: false,
   };
 
 // Get a list of all databases
@@ -70,6 +71,15 @@ client
   .addCallback(function(r) {
     callbacks.F = true;
     assert.ok('session_id' in r);
+  });
+
+
+// Test connecting to a port where there is no couch
+var client2 = couchdb.createClient(3921);
+client2
+  .uuids()
+  .addErrback(function() {
+    callbacks.G = true;
   });
 
 // Cleanup

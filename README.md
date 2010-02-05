@@ -14,7 +14,7 @@ To use the library, create a new file called `my-couch-adventure.js`:
     var
       sys = require('sys'),
       couchdb = require('node-couchdb'),
-      client = couchdb.createClient('localhost', 5984),
+      client = couchdb.createClient(5984, 'localhost'),
       db = client.db('my-db');
 
     db
@@ -33,7 +33,7 @@ To use the library, create a new file called `my-couch-adventure.js`:
 ## Todo
 
 * Authentication
-* Write docs
+* Finish docs
 
 ## Limitations
 
