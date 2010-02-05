@@ -154,11 +154,36 @@ A reference to the `couchdb.Client` this instance is tied to. READ-ONLY property
 
 ### db.request(options)
 
-Same as `client.request`, but the `path` option gets automatically prefixed by `'/<db.name>'`.
+Same as `client.request`, but the `path` option gets automatically prefixed by `'/db-name'`.
 
 ### db.exists()
 
 Returns a promise that yields a boolean indicating whether this db exists or not.
+
+### db.info()
+
+Wrapper for [GET /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#Database_Information).
+
+### db.create()
+
+Wrapper for [PUT /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#PUT_.28Create_New_Database.29).
+
+### db.remove()
+
+Wrapper for [DELETE /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#DELETE).
+
+### db.getDoc(id)
+
+Wrapper for [GET /db-name/doc-id](http://wiki.apache.org/couchdb/HTTP_Document_API#GET). Fetches a document with a given `id` from the database.
+
+### db.saveDoc(id, doc)
+
+Wrapper for [PUT /db-name/doc-id](http://wiki.apache.org/couchdb/HTTP_Document_API#PUT). Saves a json `doc` with a given `id`.
+
+### db.saveDoc(doc)
+
+Same as the above, but the `id` can either a property of `doc`, or omitted to let CouchDB generate a uuid for this new document.
+
 
 ## Todo
 
