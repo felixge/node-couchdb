@@ -73,7 +73,7 @@ Check `dep/mime.js` for a list of recognized file types.
 
 ### couchdb.createClient([port, host])
 
-Creates a new `couchdb.Client` for a given `port` (default: 5984) and `host` (default: 'localhost'). This client will queue all requests that are send through it, so ordering of requests is always guaranteed. Use multiple clients for parallel operations.
+Creates a new `couchdb.Client` for a given `port` (default: `5984`) and `host` (default: `'localhost'`). This client will queue all requests that are send through it, so ordering of requests is always guaranteed. Use multiple clients for parallel operations.
 
 ### client.host
 
@@ -99,14 +99,14 @@ Sends a request with a given `method`, `path` and `query`. Returns a promise tha
 
 Sends a request using the given `options` and return a promise that yields a result object. Available options are:
 
-* `method`: The HTTP method (default: 'GET')
-* `path`: The request path (default: '/')
-* `headers`: Additional http headers to send
-* `data`: A JS object or string to send as the request body (default: '')
+* `method`: The HTTP method (default: `'GET'`)
+* `path`: The request path (default: `'/'`)
+* `headers`: Additional http headers to send (default: `{}`)
+* `data`: A JS object or string to send as the request body (default: `''`)
 * `query`: The query options to use (default: {}).
-* `requestEncoding`: The encoding to use for sending the request (default: 'utf8')
-* `responseEncoding`: The encoding to use for sending the request. If set to 'binary', the response is emitted as a string instead of an object and the `full` option is ignored. (default: 'utf8')
-* `full`: By default the returned promise yields the parsed JSON as a JS object. If `full` is set to true, a {headers: ..., json: ...} object is yielded instead. (default: false)
+* `requestEncoding`: The encoding to use for sending the request (default: `'utf8'`)
+* `responseEncoding`: The encoding to use for sending the request. If set to `'binary'`, the response is emitted as a string instead of an object and the `full` option is ignored. (default: `'utf8'`)
+* `full`: By default the returned promise yields the parsed JSON as a JS object. If `full` is set to true, a `{headers: ..., json: ...}` object is yielded instead. (default: `false`)
 
 Example:
 
