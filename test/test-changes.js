@@ -5,13 +5,30 @@ var
 
   callbacks = {
     A: false,
+    B1: false,
+    B2: false,
+    C: false,
   },
 
   db = client.db(DB_NAME);
 
 // Init fresh db
 db.remove().addErrback(function() {});
-db.create();
+db
+  .create()
+  .addCallback(function() {
+    var stream = db.changesStream();
+    stream
+      .addListener('change', function(change) {
+        callbacks['B'+change.seq] = true;
+        if (change.seq == 2) {
+          stream.close();
+        }
+      })
+      .addListener('end', function() {
+        callbacks.C = true;
+      });
+  });
 
 db.saveDoc({test: 1});
 db.saveDoc({test: 2});

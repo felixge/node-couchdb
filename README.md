@@ -2,7 +2,6 @@
 
 # Todo
 
-* db:changes_stream
 * Authentication
 * Write docs
 
