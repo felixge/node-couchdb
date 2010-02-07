@@ -265,6 +265,8 @@ Returns an `events.EventEmitter` that emits the following events:
 
 See the [CouchDB docs](http://wiki.apache.org/couchdb/HTTP_database_API#Changes) for available `query` parameters.
 
+*Important:* This function uses its own http client for making requests, so unlike all other functions it does not go through the internal request queue.
+
 ## Todo
 
 * Implement Authentication
