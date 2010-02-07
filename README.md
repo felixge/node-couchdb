@@ -267,8 +267,7 @@ See the [CouchDB docs](http://wiki.apache.org/couchdb/HTTP_database_API#Changes)
 
 ## Todo
 
-* Authentication
-* Finish docs
+* Implement Authentication
 
 ## Limitations
 
