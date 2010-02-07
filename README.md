@@ -237,7 +237,33 @@ Wrapper for [GET /db-name/\_all\_docs\_by\_seq](http://wiki.apache.org/couchdb/H
 
 ### db.compact(design)
 
-Wrapper for [POST /db-name/\_compact/design-name](http://wiki.apache.org/couchdb/http://wiki.apache.org/couchdb/HTTP_view_API#View_Compaction). `design` provides the name of the design to invoke compact for.
+Wrapper for [POST /db-name/\_compact/design-name](http://wiki.apache.org/couchdb/HTTP_view_API#View_Compaction). `design` provides the name of the design to invoke compact for.
+
+### db.tempView(data, query)
+
+Wrapper for [POST /db-name/\_temp\_view](http://wiki.apache.org/couchdb/HTTP_view_API#Temporary_Views).
+
+### db.viewCleanup(data, query)
+
+Wrapper for [POST /db-name/\_view\_cleanup](http://wiki.apache.org/couchdb/HTTP_view_API#View_Cleanup).
+
+### db.view(design, view, [query])
+
+Wrapper for [GET /db-name/\_design/design-name/\_view/view-name](http://wiki.apache.org/couchdb/HTTP_view_API#Access.2BAC8-Query). Fetches all documents for the given `design` and `view` with the specified `query` options.
+
+### db.changes([query])
+
+Wrapper for [GET /db-name/\_changes](http://wiki.apache.org/couchdb/HTTP_database_API#Changes). This can be used for long-polling or one-time retrieval from the changes feed. If you want to get a continuous stream of changes, use the `db.changesStream()` function instead.
+
+### db.changesStream([query])
+
+Returns an `events.EventEmitter` that emits the following events:
+
+* `change(change)`: Emitted for each change line in the stream. The `change` parameter holds the change object.
+* `heartbeat`: Emitted for each heartbeat send by CouchDB, no need to check this for most stuff.
+* `end(hadError)`: Emitted if the stream ends. This should not happen unless you manually invoke `stream.close()`.
+
+See the [CouchDB docs](http://wiki.apache.org/couchdb/HTTP_database_API#Changes) for available `query` parameters.
 
 ## Todo
 
