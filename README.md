@@ -192,7 +192,9 @@ Deletes document `id` with `rev` from the db.
 
 Copies document `srcId` to `destId`. If `destId` already exists, you need to supply `destRev` to overwrite it.
 
-Awesome
+### db.bulkDocs(data)
+
+Wrapper for [POST /db-name/\_bulk_docs](http://wiki.apache.org/couchdb/HTTP_Bulk_Document_API#Modify_Multiple_Documents_With_a_Single_Request).
 
 ### db.saveDesign(design, doc)
 
@@ -236,10 +238,6 @@ Wrapper for [GET /db-name/\_all\_docs\_by\_seq](http://wiki.apache.org/couchdb/H
 ### db.compact(design)
 
 Wrapper for [POST /db-name/\_compact/design-name](http://wiki.apache.org/couchdb/http://wiki.apache.org/couchdb/HTTP_view_API#View_Compaction). `design` provides the name of the design to invoke compact for.
-
-### db.bulkDocs(data)
-
-Wrapper for [POST /db-name/\_bulk_docs](http://wiki.apache.org/couchdb/HTTP_Bulk_Document_API#Modify_Multiple_Documents_With_a_Single_Request).
 
 ## Todo
 
