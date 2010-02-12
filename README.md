@@ -235,9 +235,9 @@ Wrapper for [GET /db-name/\_all\_docs](http://wiki.apache.org/couchdb/HTTP_Docum
 
 Wrapper for [GET /db-name/\_all\_docs\_by\_seq](http://wiki.apache.org/couchdb/HTTP_Document_API#all_docs_by_seq).
 
-### db.compact(design)
+### db.compact([design])
 
-Wrapper for [POST /db-name/\_compact/design-name](http://wiki.apache.org/couchdb/HTTP_view_API#View_Compaction). `design` provides the name of the design to invoke compact for.
+Wrapper for [POST /db-name/\_compact/design-name](http://wiki.apache.org/couchdb/HTTP_view_API#View_Compaction). `design` provides the name of the design to invoke compact for, otherwise the whole db is used.
 
 ### db.tempView(data, query)
 
