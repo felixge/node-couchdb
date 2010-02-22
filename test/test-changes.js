@@ -13,10 +13,11 @@ var
   db = client.db(DB_NAME);
 
 // Init fresh db
-db.remove().addErrback(function() {});
+db.remove();
 db
-  .create()
-  .addCallback(function() {
+  .create(function(er) {
+    if (er) throw er;
+    
     var stream = db.changesStream();
     stream
       .addListener('change', function(change) {
@@ -33,13 +34,12 @@ db
 db.saveDoc({test: 1});
 db.saveDoc({test: 2});
 
-db
-  .changes({since: 1})
-  .addCallback(function(r) {
-    callbacks.A = true;
-    assert.equal(2, r.results[0].seq);
-    assert.equal(1, r.results.length);
-  });
+db.changes({since: 1}, function(er, r) {
+  if (er) throw er;
+  callbacks.A = true;
+  assert.equal(2, r.results[0].seq);
+  assert.equal(1, r.results.length);
+});
 
 process.addListener('exit', function() {
   checkCallbacks(callbacks);
