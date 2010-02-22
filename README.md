@@ -13,7 +13,7 @@ To use the library, create a new file called `my-couch-adventure.js`:
 
     var
       sys = require('sys'),
-      couchdb = require('node-couchdb'),
+      couchdb = require('./lib/couchdb.js'),
       client = couchdb.createClient(5984, 'localhost'),
       db = client.db('my-db');
 
@@ -85,7 +85,7 @@ Takes the path of a `file` and callback receives a JS object suitable for inline
         // r => {"content_type":"text/javascript","data":"dmFyCiAgs...="}
       });
 
-Check `dep/mime.js` for a list of recognized file types.
+Check `lib/dep/mime.js` for a list of recognized file types.
 
 ### couchdb.createClient([port, host])
 
@@ -232,7 +232,7 @@ A convenience wrapper for `saveDoc()` that prefixes the document id with `'_desi
 Attaches a `file` to a given `docId`. Available `options`:
 
 * `name`: The name of the attachment. (default: `path.basename(file)`)
-* `contentType`: The content type to associate with this attachment (default: see `dep/mime.js`)
+* `contentType`: The content type to associate with this attachment (default: see `lib/dep/mime.js`)
 * `rev`: If the `docId` already exists, you have to supply its current revision.
 
 ### db.removeAttachment(docId, attachmentId, docRev)

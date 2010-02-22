@@ -1,0 +1,9 @@
+{
+  "name" : "node-couchdb",
+  "author" : "Felix Geisendörfer <felix@debuggable.com>",
+  "description" : "A CouchDB module following node.js idioms",
+  "keywords" : ["couch", "couchdb"],
+  "engines" : ["node"],
+  "directories" : { "lib" : "lib" },
+  "main" : "lib/couchdb"
+}
