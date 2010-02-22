@@ -20,7 +20,7 @@ db
     
     var stream = db.changesStream();
     stream
-      .addListener('change', function(change) {
+      .addListener('data', function(change) {
         callbacks['B'+change.seq] = true;
         if (change.seq == 2) {
           stream.close();
