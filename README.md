@@ -18,14 +18,14 @@ To use the library, create a new file called `my-couch-adventure.js`:
       db = client.db('my-db');
 
     db
-      .saveDoc('my-doc', {awesome: 'couch fun'})
-      .addCallback(function() {
+      .saveDoc('my-doc', {awesome: 'couch fun'}, function(er, ok) {
+        if (er) throw er;
         sys.puts('Saved my first doc to the couch!');
       });
 
     db
-      .getDoc('my-doc')
-      .addCallback(function(doc) {
+      .getDoc('my-doc', function(er, doc) {
+        if (er) throw er;
         sys.puts('Fetched my new doc from couch:');
         sys.p(doc);
       });
@@ -33,6 +33,22 @@ To use the library, create a new file called `my-couch-adventure.js`:
 If you are wondering if there is a race-condition in the above example, the answer is no. Each `couchdb.Client` uses an internal queue for its requests, just like `http.Client`. This guarantees ordering. If you want to perform multiple requests at once, use multiple `couchdb.Client` instances.
 
 ## API Documentation
+
+### Callbacks
+
+All asynchronous functions are performed with callbacks.  Callback functions are always the last argument, and always receive one or two arguments.  The first argument is an error object or `null` if an error occurs.  The second is the data returned by the function in question, if appropriate.
+
+The callback argument is optional.  If not supplied, then errors and return values will be silently ignored.
+
+For example:
+
+    client.request('/_uuids', {count: 2}, function (er, data) {
+      if (er) {
+        // an error occurred.  Attempt to handle it or rethrow, or whatever.
+      } else {
+        // data is the result of the request.
+      }
+    })
 
 ### couchdb.toJSON(data)
 
@@ -59,13 +75,13 @@ Identical to `querystring.stringify()`, except that boolean values will be conve
 
 node-couchdb uses this function everywhere for query serialization, this helps since couchdb expects boolean values in this format.
 
-### couchdb.toAttachment(file)
+### couchdb.toAttachment(file, cb)
 
-Takes the path of a `file` and returns a promise that yields a JS object suitable for inline document attachment:
+Takes the path of a `file` and callback receives a JS object suitable for inline document attachment:
 
     couchdb
-      .toAttachment(__filename)
-      .addCallback(function(r) {
+      .toAttachment(__filename, function(er, r) {
+        if (er) throw er;
         // r => {"content_type":"text/javascript","data":"dmFyCiAgs...="}
       });
 
@@ -83,21 +99,21 @@ The host this client is connecting to. READ-ONLY property
 
 The port this client is connecting to. READ-ONLY property
 
-### client.request(path, [query])
+### client.request(path, [query], cb)
 
-Sends a GET request with a given `path` and `query`. Returns a promise that yields a result object. Example:
+Sends a GET request with a given `path` and `query`. Callback receives a result object. Example:
 
     client.request('/_uuids', {count: 2})
 
 ### client.request(method, [path, query])
 
-Sends a request with a given `method`, `path` and `query`. Returns a promise that yields a result object. Example:
+Sends a request with a given `method`, `path` and `query`. Callback receives a result object. Example:
 
     client.request('get', '/_uuids', {count: 2})
 
-### client.request(options)
+### client.request(options, cb)
 
-Sends a request using the given `options` and return a promise that yields a result object. Available options are:
+Sends a request using the given `options` and callback receives a result object. Available options are:
 
 * `method`: The HTTP method (default: `'GET'`)
 * `path`: The request path (default: `'/'`)
@@ -106,7 +122,7 @@ Sends a request using the given `options` and return a promise that yields a res
 * `query`: The query options to use (default: {}).
 * `requestEncoding`: The encoding to use for sending the request (default: `'utf8'`)
 * `responseEncoding`: The encoding to use for sending the request. If set to `'binary'`, the response is emitted as a string instead of an object and the `full` option is ignored. (default: `'utf8'`)
-* `full`: By default the returned promise yields the parsed JSON as a JS object. If `full` is set to true, a `{headers: ..., json: ...}` object is yielded instead. (default: `false`)
+* `full`: By default the callback receives the parsed JSON as a JS object. If `full` is set to true, a `{headers: ..., json: ...}` object is yielded instead. (default: `false`)
 
 Example:
 
@@ -114,7 +130,7 @@ Example:
       path: '/_uuids',
       query: {count: 5},
       full: true
-    });
+    }, callback);
 
 ### client.allDbs()
 
@@ -156,15 +172,15 @@ A reference to the `couchdb.Client` this instance is tied to. READ-ONLY property
 
 Same as `client.request`, but the `path` option gets automatically prefixed by `'/db-name'`.
 
-### db.exists()
+### db.exists(cb)
 
-Returns a promise that yields a boolean indicating whether this db exists or not.
+Callback called with a boolean indicating whether this db exists or not.
 
-### db.info()
+### db.info(cb)
 
 Wrapper for [GET /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#Database_Information).
 
-### db.create()
+### db.create(cb)
 
 Wrapper for [PUT /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#PUT_.28Create_New_Database.29).
 
@@ -223,9 +239,9 @@ Attaches a `file` to a given `docId`. Available `options`:
 
 Delete attachment `attachmentId` from doc `docId` with `docRev`.
 
-### db.getAttachment(docId, attachmentId)
+### db.getAttachment(docId, attachmentId, cb)
 
-Loads the attachment `attachmentId` from `docId`. The returned promise yields the binary content of the attachment. There is no streaming, don't use this with large files.
+Loads the attachment `attachmentId` from `docId`. The callback receivesthe binary content of the attachment. There is no streaming, don't use this with large files.
 
 ### db.allDocs(query)
 
@@ -257,9 +273,9 @@ Wrapper for [GET /db-name/\_changes](http://wiki.apache.org/couchdb/HTTP_databas
 
 ### db.changesStream([query])
 
-Returns an `events.EventEmitter` that emits the following events:
+Returns an `events.EventEmitter` stream that emits the following events:
 
-* `change(change)`: Emitted for each change line in the stream. The `change` parameter holds the change object.
+* `data(change)`: Emitted for each change line in the stream. The `change` parameter holds the change object.
 * `heartbeat`: Emitted for each heartbeat send by CouchDB, no need to check this for most stuff.
 * `end(hadError)`: Emitted if the stream ends. This should not happen unless you manually invoke `stream.close()`.
 
