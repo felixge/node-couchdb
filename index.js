@@ -1,2 +1,2 @@
 // For your convenience
-process.mixin(exports, require('./lib/couchdb'));
+module.exports = require('./lib/couchdb');
