@@ -286,7 +286,6 @@ See the [CouchDB docs](http://wiki.apache.org/couchdb/HTTP_database_API#Changes)
 ## Todo
 
 * http status, message and parsed body for errors
-* toQuery: JSON.encode values except stale=ok
 * db.saveAttachment(file, docId, options) take file descriptor
 * Implement Authentication
 
