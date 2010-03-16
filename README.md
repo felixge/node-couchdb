@@ -13,7 +13,7 @@ To use the library, create a new file called `my-couch-adventure.js`:
 
     var
       sys = require('sys'),
-      couchdb = require('./lib/couchdb.js'),
+      couchdb = require('node-couchdb/lib/couchdb'),
       client = couchdb.createClient(5984, 'localhost'),
       db = client.db('my-db');
 
