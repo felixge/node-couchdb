@@ -1,8 +1,8 @@
 require('./common');
 
 var query = couchdb.toQuery({
-  foo: 'bar',
+  key: 'bar',
   very: true,
   stale: 'ok'
 });
-assert.equal('foo=%22bar%22&very=true&stale=ok', query);
+assert.equal('key=%22bar%22&very=true&stale=ok', query);
