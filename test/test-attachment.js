@@ -20,7 +20,7 @@ db.create();
 
 couchdb
   .toAttachment(__dirname+'/fixture/logo.png', function (er, attachment) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     
     callbacks.A = true;
     assert.equal('image/png', attachment.content_type);
@@ -32,7 +32,7 @@ couchdb
         'logo.png': attachment
       }
     }, function (er, r) {
-      if (er) throw er;
+      if (er) throw new Error(JSON.stringify(er));
       callbacks.B = true;
       assert.ok(r.ok);
       assert.equal('logo-doc', r.id);
@@ -49,13 +49,13 @@ db.saveAttachment(
   __dirname+'/fixture/logo.png',
   'logo-2',
   function (er, r) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     callbacks.C = true;
     assert.ok(r.ok);
     assert.equal('logo-2', r.id);
 
     db.removeAttachment('logo-2', 'logo.png', r.rev, function (er, r) {
-      if (er) throw er;
+      if (er) throw new Error(JSON.stringify(er));
       callbacks.D = true;
       assert.ok(r.ok);
     })

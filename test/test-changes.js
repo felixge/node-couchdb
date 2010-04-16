@@ -16,7 +16,7 @@ var
 db.remove();
 db
   .create(function(er) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     
     var stream = db.changesStream();
     stream
@@ -35,7 +35,7 @@ db.saveDoc({test: 1});
 db.saveDoc({test: 2});
 
 db.changes({since: 1}, function(er, r) {
-  if (er) throw er;
+  if (er) throw new Error(JSON.stringify(er));
   callbacks.A = true;
   assert.equal(2, r.results[0].seq);
   assert.equal(1, r.results.length);

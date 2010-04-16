@@ -19,7 +19,7 @@ var
 // Get a list of all databases
 client
   .allDbs(function(er, r) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     callbacks.A = true;    
     assert.ok('length' in r);
   });
@@ -27,7 +27,7 @@ client
 // Get the couch config
 client
   .config(function(er, r) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     callbacks.B = true;    
     assert.ok('httpd' in r);
   });
@@ -35,7 +35,7 @@ client
 // Get some uuids
 client
   .uuids(3, function(er, r) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     callbacks.C = true;    
     assert.equal(3, r.uuids.length);
   });
@@ -43,7 +43,7 @@ client
 // Get the couch stats
 client
   .stats('httpd_status_codes', '200', function(er, r) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     callbacks.D = true;
     assert.deepEqual(['httpd_status_codes'], Object.keys(r));
     assert.deepEqual(['200'], Object.keys(r.httpd_status_codes));
@@ -52,7 +52,7 @@ client
 // Find all active tasks
 client
   .activeTasks(function(er, r) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     callbacks.E = true;
     assert.ok('length' in r);
   });
@@ -69,7 +69,7 @@ db2.create();
 
 client
   .replicate(DB_NAME, DB_NAME2, function(er, r) {
-    if (er) throw er;
+    if (er) throw new Error(JSON.stringify(er));
     callbacks.F = true;
     assert.ok('session_id' in r);
   });

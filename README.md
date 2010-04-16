@@ -19,13 +19,13 @@ To use the library, create a new file called `my-couch-adventure.js`:
 
     db
       .saveDoc('my-doc', {awesome: 'couch fun'}, function(er, ok) {
-        if (er) throw er;
+        if (er) throw new Error(JSON.stringify(er));
         sys.puts('Saved my first doc to the couch!');
       });
 
     db
       .getDoc('my-doc', function(er, doc) {
-        if (er) throw er;
+        if (er) throw new Error(JSON.stringify(er));
         sys.puts('Fetched my new doc from couch:');
         sys.p(doc);
       });
@@ -81,7 +81,7 @@ Takes the path of a `file` and callback receives a JS object suitable for inline
 
     couchdb
       .toAttachment(__filename, function(er, r) {
-        if (er) throw er;
+        if (er) throw new Error(JSON.stringify(er));
         // r => {"content_type":"text/javascript","data":"dmFyCiAgs...="}
       });
 
@@ -279,7 +279,7 @@ Returns an `events.EventEmitter` stream that emits the following events:
 
 * `data(change)`: Emitted for each change line in the stream. The `change` parameter holds the change object.
 * `heartbeat`: Emitted for each heartbeat send by CouchDB, no need to check this for most stuff.
-* `end(hadError)`: Emitted if the stream ends. This should not happen unless you manually invoke `stream.close()`.
+* `end(hadError)`: Emitted if the stream ends. This should not happen unless you manually invoke `stream.end()`.
 
 See the [CouchDB docs](http://wiki.apache.org/couchdb/HTTP_database_API#Changes) for available `query` parameters.
 
