@@ -6,14 +6,16 @@ A thin node.js idiom based module for [CouchDB's REST API](http://wiki.apache.or
 
 Installation is simple:
 
-    $ cd ~/.node_libraries
+    $ cd ~/src
     $ git clone git://github.com/felixge/node-couchdb.git
+    $ cd ~/.node_libraries
+    $ ln -s ~/src/node-couchdb couchdb
 
 To use the library, create a new file called `my-couch-adventure.js`:
 
     var
       sys = require('sys'),
-      couchdb = require('node-couchdb/lib/couchdb'),
+      couchdb = require('couchdb'),
       client = couchdb.createClient(5984, 'localhost'),
       db = client.db('my-db');
 
