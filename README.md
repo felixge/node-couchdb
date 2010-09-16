@@ -267,7 +267,7 @@ Wrapper for [POST /db-name/\_temp\_view](http://wiki.apache.org/couchdb/HTTP_vie
 
 Wrapper for [POST /db-name/\_view\_cleanup](http://wiki.apache.org/couchdb/HTTP_view_API#View_Cleanup).
 
-### db.view(design, view, [query])
+### db.view(design, view, [query], [cb])
 
 Wrapper for [GET /db-name/\_design/design-name/\_view/view-name](http://wiki.apache.org/couchdb/HTTP_view_API#Access.2BAC8-Query). Fetches all documents for the given `design` and `view` with the specified `query` options.
 
