@@ -7,7 +7,7 @@ A thin node.js idiom based module for [CouchDB's REST API](http://wiki.apache.or
 Installation is simple:
 
     $ cd ~/src
-    $ git clone git://github.com/felixge/node-couchdb.git
+    $ git clone git://github.com/timemachine3030/node-couchdb.git
     $ cd ~/.node_libraries
     $ ln -s ~/src/node-couchdb couchdb
 
