@@ -6,16 +6,14 @@ A thin node.js idiom based module for [CouchDB's REST API](http://wiki.apache.or
 
 Installation is simple:
 
-    $ cd ~/src
-    $ git clone git://github.com/felixge/node-couchdb.git
     $ cd ~/.node_libraries
-    $ ln -s ~/src/node-couchdb couchdb
+    $ git clone git://github.com/felixge/node-couchdb.git
 
 To use the library, create a new file called `my-couch-adventure.js`:
 
     var
       sys = require('sys'),
-      couchdb = require('couchdb'),
+      couchdb = require('node-couchdb/lib/couchdb'),
       client = couchdb.createClient(5984, 'localhost'),
       db = client.db('my-db');
 
@@ -267,13 +265,14 @@ Wrapper for [POST /db-name/\_temp\_view](http://wiki.apache.org/couchdb/HTTP_vie
 
 Wrapper for [POST /db-name/\_view\_cleanup](http://wiki.apache.org/couchdb/HTTP_view_API#View_Cleanup).
 
-### db.view(design, view, [query], [cb])
+### db.view(design, view, [query])
 
 Wrapper for [GET /db-name/\_design/design-name/\_view/view-name](http://wiki.apache.org/couchdb/HTTP_view_API#Access.2BAC8-Query). Fetches all documents for the given `design` and `view` with the specified `query` options.
 
-### db.list(design, list, view, [query], [cb])
+### db.update(design, update, docId, [query], [cb])
 
-Wrapper for [GET /db-name/\_design/design-name/\_list/list-name/view-name](http://wiki.apache.org/couchdb/Formatting_with_Show_and_List#Listing_Views_with_CouchDB_0.10_and_later). Fetches all documents for the given `design` and `view` with the specified `query` options.
+Wrapper for [GET /db-name/\_design/design-name/\_update/update-name]?<field>=<value>(http://wiki.apache.org/couchdb/Document_Update_Handlers). Updates document identified by the given docId for the given `design` and `update` with the fields defined in the query
+
 
 ### db.changes([query])
 
