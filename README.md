@@ -265,6 +265,10 @@ Wrapper for [POST /db-name/\_temp\_view](http://wiki.apache.org/couchdb/HTTP_vie
 
 Wrapper for [POST /db-name/\_view\_cleanup](http://wiki.apache.org/couchdb/HTTP_view_API#View_Cleanup).
 
+### db.list(design, list, view, [query], [cb])
+
+Wrapper for [GET /db-name/\_design/design-name/\_list/list-name/view-name](http://wiki.apache.org/couchdb/Formatting_with_Show_and_List#Listing_Views_with_CouchDB_0.10_and_later). Fetches all documents for the given `design` and `view` with the specified `query` options.
+
 ### db.view(design, view, [query])
 
 Wrapper for [GET /db-name/\_design/design-name/\_view/view-name](http://wiki.apache.org/couchdb/HTTP_view_API#Access.2BAC8-Query). Fetches all documents for the given `design` and `view` with the specified `query` options.
