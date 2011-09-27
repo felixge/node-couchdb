@@ -4,18 +4,14 @@ A thin node.js idiom based module for [CouchDB's REST API](http://wiki.apache.or
 
 ## Tutorial
 
-Installation is simple:
-
-    $ cd ~/src
-    $ git clone git://github.com/felixge/node-couchdb.git
-    $ cd ~/.node_libraries
-    $ ln -s ~/src/node-couchdb couchdb
+Installation is simple from [NPM](http://npmjs.org/):
+    $ npm install felix-couchdb
 
 To use the library, create a new file called `my-couch-adventure.js`:
 
     var
-      sys = require('sys'),
-      couchdb = require('couchdb'),
+      sys = require('util'),
+      couchdb = require('felix-couchdb'),
       client = couchdb.createClient(5984, 'localhost'),
       db = client.db('my-db');
 
