@@ -5,6 +5,7 @@ A thin node.js idiom based module for [CouchDB's REST API](http://wiki.apache.or
 ## Tutorial
 
 Installation is simple from [NPM](http://npmjs.org/):
+
     $ npm install felix-couchdb
 
 To use the library, create a new file called `my-couch-adventure.js`:
