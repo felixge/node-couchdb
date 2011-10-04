@@ -86,11 +86,14 @@ Takes the path of a `file` and callback receives a JS object suitable for inline
 
 Check `lib/dep/mime.js` for a list of recognized file types.
 
-### couchdb.createClient([port, host, user, pass])
+### couchdb.createClient([port, host, user, pass, maxListeners])
 
 Creates a new `couchdb.Client` for a given `port` (default: `5984`) and `host` (default: `'localhost'`). This client will queue all requests that are send through it, so ordering of requests is always guaranteed. Use multiple clients for parallel operations.
 
 If the optional `user` and `pass` arguments are supplied, all requests will be made with HTTP Basic Authorization
+
+If the optional `maxListeners` is supplied - module uses emitter.setMaxListeners method. It may be usefull if you use many couchdb requests and don't want to see warnings.
+Default Node.js value for this == 11 listeners; if `maxListeners` == 0 then warnings are off.
 
 ### client.host
 
