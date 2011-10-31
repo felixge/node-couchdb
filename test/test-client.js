@@ -70,29 +70,39 @@ client
 
 // Lets create two dbs to test replication
 var db = client.db(DB_NAME);
-db.remove();
-db.create();
-db.saveDoc(TEST_ID, TEST_DOC);
-
 var db2 = client.db(DB_NAME2);
-db2.remove();
-db2.create();
 
-client
-  .replicate(DB_NAME, DB_NAME2, function(er, r) {
-    if (er) {
-      if (er.reason && er.reason.indexOf('erlang') > 0) {
-        console.error("---------------------------------------------------------------------------------");
-        console.error(" Test failed. Possibly due to https://issues.apache.org/jira/browse/COUCHDB-1221");
-        console.error(" Try restarting CouchDB for a quick fix.");
-        console.error("---------------------------------------------------------------------------------");
+// Here's how we'll actually replicate later.
+var replicate = function() {
+  client
+    .replicate(DB_NAME, DB_NAME2, function(er, r) {
+      if (er) {
+        if (er.reason && er.reason.indexOf('erlang') > 0) {
+          console.error("---------------------------------------------------------------------------------");
+          console.error(" Test failed. Possibly due to https://issues.apache.org/jira/browse/COUCHDB-1221");
+          console.error(" Try restarting CouchDB for a quick fix.");
+          console.error("---------------------------------------------------------------------------------");
+        }
+        throw new Error(JSON.stringify(er));
       }
-      throw new Error(JSON.stringify(er));
-    }
-    callbacks.F = true;
-    assert.ok('session_id' in r);
-  });
+      callbacks.F = true;
+      assert.ok('session_id' in r);
+    });
+};
 
+// Create first db, save document, create second db, then
+// replicate. And all that in a well-defined order.
+db.remove(function() {
+  db.create(function() {
+    db.saveDoc(TEST_ID, TEST_DOC, function() {
+      db2.remove(function() {
+        db2.create(function() {
+          replicate();
+        });
+      });
+    });
+  });
+});
 
 // Test connecting to a port where there is no couch
 var client2 = couchdb.createClient(3921);
