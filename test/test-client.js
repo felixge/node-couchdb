@@ -1,5 +1,15 @@
 require('./common');
 
+/*
+ * Note: If this test fails (specifically the replication part) with an 
+ * Erlang stacktrace, this may be due to
+ * 
+ *   https://issues.apache.org/jira/browse/COUCHDB-1221
+ * 
+ * I was able to work around this by restarting CouchDB.
+ *                                           ~~ https://github.com/hsch/
+ */
+
 var
   DB_NAME = 'node-couchdb-test',
   DB_NAME2 = 'node-couchdb-test-mirror',
