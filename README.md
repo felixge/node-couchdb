@@ -254,7 +254,8 @@ Wrapper for [GET /db-name/\_all\_docs](http://wiki.apache.org/couchdb/HTTP_Docum
 ### db.allDocsBySeq(query)
 
 Wrapper for [GET /db-name/\_all\_docs\_by\_seq](http://wiki.apache.org/couchdb/HTTP_Document_API#all_docs_by_seq).
-Replaced by [GET /db-name\_changes](http://wiki.apache.org/couchdb/HTTP_database_API#Changes) as of CouchDB 0.11.
+
+Replaced by [GET /db-name/\_changes](http://wiki.apache.org/couchdb/HTTP_database_API#Changes) as of CouchDB 0.11.
 Consider using `db.changes` or `db.changesStream`.
 
 ### db.compact([design])
