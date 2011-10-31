@@ -14,6 +14,7 @@ var
     E: false,
     F: false,
     G: false,
+    H: false
   };
 
 // Get a list of all databases
@@ -77,6 +78,9 @@ client
 
 // Test connecting to a port where there is no couch
 var client2 = couchdb.createClient(3921);
+client2._addClientListener('error', function(er) {
+  if (er) callbacks.H = true;
+});
 client2
   .uuids(function(er, r) {
     if (er) callbacks.G = true;
