@@ -80,7 +80,15 @@ db2.create();
 
 client
   .replicate(DB_NAME, DB_NAME2, function(er, r) {
-    if (er) throw new Error(JSON.stringify(er));
+    if (er) {
+      if (er.reason && er.reason.indexOf('erlang') > 0) {
+        console.error("---------------------------------------------------------------------------------");
+        console.error(" Test failed. Possibly due to https://issues.apache.org/jira/browse/COUCHDB-1221");
+        console.error(" Try restarting CouchDB for a quick fix.");
+        console.error("---------------------------------------------------------------------------------");
+      }
+      throw new Error(JSON.stringify(er));
+    }
     callbacks.F = true;
     assert.ok('session_id' in r);
   });
