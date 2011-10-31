@@ -11,4 +11,4 @@ global.checkCallbacks = function(callbacks) {
 };
 
 // Provide a port/host here if your local db has a non-default setup
-GLOBAL.client = couchdb.createClient(undefined, undefined, undefined, undefined, 15);
+GLOBAL.client = couchdb.createClient(undefined, undefined, undefined, undefined, 20);
