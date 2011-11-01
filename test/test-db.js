@@ -130,6 +130,17 @@ db
 // Test allDocsBySeq
 db
   .allDocsBySeq(function(er, r) {
+    /*
+     * An error here is perfectly valid as of CouchDB 0.11. The _all_docs_by_seq API
+     * has been replaced by _changes.
+     */
+    if (er && er.error == 'not_found' && er.reason == 'missing') {
+      callbacks.L = true;
+      return;
+    }
+    /*
+     * If there is as an error different from 404, it may still be a problem.
+     */
     if (er) throw new Error(JSON.stringify(er));
     callbacks.L = true;
     assert.ok('rows' in r);
