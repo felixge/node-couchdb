@@ -288,7 +288,7 @@ Returns an `events.EventEmitter` stream that emits the following events:
 
 * `data(change)`: Emitted for each change line in the stream. The `change` parameter holds the change object.
 * `heartbeat`: Emitted for each heartbeat send by CouchDB, no need to check this for most stuff.
-* `end(hadError)`: Emitted if the stream ends. This should not happen unless you manually invoke `stream.end()`.
+* `end(hadError)`: Emitted if the stream ends. This should not happen unless you manually invoke `stream.close()`.
 
 See the [CouchDB docs](http://wiki.apache.org/couchdb/HTTP_database_API#Changes) for available `query` parameters.
 
