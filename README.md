@@ -35,7 +35,7 @@ If you are wondering if there is a race-condition in the above example, the answ
 
 ### Callbacks
 
-All asynchronous functions are performed with callbacks.  Callback functions are always the last argument, and always receive one or two arguments.  The first argument is an error object or `null` if an error occurs.  The second is the data returned by the function in question, if appropriate.
+All asynchronous functions are performed with callbacks.  Callback functions are always the last argument, and always receive one or two arguments.  The first argument is an error object or `null` if no error occurs.  The second is the data returned by the function in question, if appropriate.
 
 The callback argument is optional.  If not supplied, then errors and return values will be silently ignored.
 
