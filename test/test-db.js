@@ -5,6 +5,7 @@ var
   TEST_ID = 'my-doc',
   TEST_ID2 = 'my-doc2',
   TEST_DOC = {hello: 'world'},
+  createUpdate = function(rev) { return {_id: TEST_ID, _rev: rev, hello: 'universe'}; },
 
   callbacks = {
     A: false,
@@ -28,6 +29,9 @@ var
     S: false,
     T: false,
     U: false,
+    V: false,
+    W: false,
+    X: false
   },
 
   db = client.db(DB_NAME);
@@ -61,16 +65,60 @@ db
 // Create a document with a given id
 db
   .saveDoc(TEST_ID, TEST_DOC, function(er, r) {
+
+    // Remember revisions for save and update tests.
+    var revisions = {
+    };
+
     if (er) throw new Error(JSON.stringify(er));
     callbacks.D = true;
     assert.equal(TEST_ID, r.id);
     assert.ok('rev' in r);
+    revisions.first = r.rev; // keep for next test
 
+    // Get the document, check contents
     db
       .getDoc(TEST_ID, function(er, doc) {
         if (er) throw new Error(JSON.stringify(er));
         callbacks.U = true;
         assert.equal(doc.hello, TEST_DOC.hello);
+      });
+
+    // Update the document, check if the revision parameter works
+    db
+      .saveDoc(createUpdate(revisions.first), function(er, r) {
+        if (er) throw new Error(JSON.stringify(er));
+        callbacks.D = true;
+        assert.equal(TEST_ID, r.id);
+        assert.ok('rev' in r);
+        revisions.second = r.rev;
+
+        // Get document without revision, must contain the latest text.
+        db
+          .getDoc(TEST_ID, function(er, doc) {
+            if (er) throw new Error(JSON.stringify(er));
+            callbacks.V = true;
+            assert.notEqual(doc.hello, TEST_DOC.hello);
+            assert.equal(doc._rev, revisions.second);
+          });
+
+        // Get document with first revision, must contain the earlier text.
+        db
+          .getDoc(TEST_ID, revisions.first, function(er, doc) {
+            if (er) throw new Error(JSON.stringify(er));
+            callbacks.W = true;
+            assert.equal(doc.hello, TEST_DOC.hello);
+            assert.equal(doc._rev, revisions.first);
+          });
+          
+        // Get document with latest revision explicitly, must contain the latest text.
+        db
+          .getDoc(TEST_ID, revisions.second, function(er, doc) {
+            if (er) throw new Error(JSON.stringify(er));
+            callbacks.X = true;
+            assert.notEqual(doc.hello, TEST_DOC.hello);
+            assert.equal(doc._rev, revisions.second);
+          });
       });
   });
 
