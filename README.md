@@ -192,9 +192,9 @@ Wrapper for [PUT /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#PUT_
 
 Wrapper for [DELETE /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#DELETE).
 
-### db.getDoc(id)
+### db.getDoc(id, [rev])
 
-Wrapper for [GET /db-name/doc-id](http://wiki.apache.org/couchdb/HTTP_Document_API#GET). Fetches a document with a given `id` from the database.
+Wrapper for [GET /db-name/doc-id\[?rev=\]](http://wiki.apache.org/couchdb/HTTP_Document_API#GET). Fetches a document with a given `id` and optional `rev` from the database.
 
 ### db.saveDoc(id, doc)
 
@@ -288,7 +288,7 @@ Returns an `events.EventEmitter` stream that emits the following events:
 
 * `data(change)`: Emitted for each change line in the stream. The `change` parameter holds the change object.
 * `heartbeat`: Emitted for each heartbeat send by CouchDB, no need to check this for most stuff.
-* `end(hadError)`: Emitted if the stream ends. This should not happen unless you manually invoke `stream.end()`.
+* `end(hadError)`: Emitted if the stream ends. This should not happen unless you manually invoke `stream.close()`.
 
 See the [CouchDB docs](http://wiki.apache.org/couchdb/HTTP_database_API#Changes) for available `query` parameters.
 
