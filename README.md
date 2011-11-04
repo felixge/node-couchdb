@@ -1,3 +1,12 @@
+# IMPORTANT: THIS MODULE IS NOT ACTIVELY MAINTAINED
+
+While I will click the merge button on reasonably looking pull requests and
+also publish npm versions, I do not have time to do any maintainence on this
+module beyond that.
+
+I would love for somebody to take over this project, please get in touch if
+you are interested.
+
 # Node.js CouchDB module
 
 A thin node.js idiom based module for [CouchDB's REST API](http://wiki.apache.org/couchdb/HTTP_REST_API) that tries to stay close to the metal.
