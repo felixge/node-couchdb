@@ -20,7 +20,7 @@ Installation is simple from [NPM](http://npmjs.org/):
 To use the library, create a new file called `my-couch-adventure.js`:
 
     var
-      sys = require('util'),
+      util = require('util'),
       couchdb = require('felix-couchdb'),
       client = couchdb.createClient(5984, 'localhost'),
       db = client.db('my-db');
@@ -28,14 +28,14 @@ To use the library, create a new file called `my-couch-adventure.js`:
     db
       .saveDoc('my-doc', {awesome: 'couch fun'}, function(er, ok) {
         if (er) throw new Error(JSON.stringify(er));
-        sys.puts('Saved my first doc to the couch!');
+        util.puts('Saved my first doc to the couch!');
       });
 
     db
       .getDoc('my-doc', function(er, doc) {
         if (er) throw new Error(JSON.stringify(er));
-        sys.puts('Fetched my new doc from couch:');
-        sys.p(doc);
+        util.puts('Fetched my new doc from couch:');
+        util.p(doc);
       });
 
 If you are wondering if there is a race-condition in the above example, the answer is no. Each `couchdb.Client` uses an internal queue for its requests, just like `http.Client`. This guarantees ordering. If you want to perform multiple requests at once, use multiple `couchdb.Client` instances.

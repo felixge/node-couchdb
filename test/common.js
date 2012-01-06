@@ -1,6 +1,6 @@
-var sys = require('sys');
-global.p = sys.p;
-global.puts = sys.puts;
+var util = require('util');
+global.p = util.p;
+global.puts = util.puts;
 
 global.couchdb = require('../lib/couchdb');
 global.assert = require('assert');

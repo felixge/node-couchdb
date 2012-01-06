@@ -1,7 +1,6 @@
 require('./common');
 
 var
-  sys = require("sys"),
   DB_NAME = 'node-couchdb-test',
 
   callbacks = {
