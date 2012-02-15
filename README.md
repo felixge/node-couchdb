@@ -1,11 +1,7 @@
-# IMPORTANT: THIS MODULE IS NOT ACTIVELY MAINTAINED
+# Now maintained and active!!! 
 
-While I will click the merge button on reasonably looking pull requests and
-also publish npm versions, I do not have time to do any maintainence on this
-module beyond that.
+# I'd like to thank Felix for creating this and hope you find it useful when working with node and couchDB.
 
-I would love for somebody to take over this project, please get in touch if
-you are interested.
 
 # Node.js CouchDB module
 
