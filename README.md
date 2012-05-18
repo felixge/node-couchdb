@@ -197,9 +197,9 @@ Wrapper for [PUT /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#PUT_
 
 Wrapper for [DELETE /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#DELETE).
 
-### db.getDoc(id, [rev])
+### db.getDoc(id, [rev], [attachments])
 
-Wrapper for [GET /db-name/doc-id\[?rev=\]](http://wiki.apache.org/couchdb/HTTP_Document_API#GET). Fetches a document with a given `id` and optional `rev` from the database.
+Wrapper for [GET /db-name/doc-id\[?rev=\]\[&attachments=\]](http://wiki.apache.org/couchdb/HTTP_Document_API#GET). Fetches a document with a given `id` and optional `rev` and/or `attachments` from the database.
 
 ### db.saveDoc(id, doc)
 
