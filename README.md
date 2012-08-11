@@ -22,6 +22,12 @@ To use the library, create a new file called `my-couch-adventure.js`:
       db = client.db('my-db');
 
     db
+      .create(function(er){
+        if (er) throw new Error(JSON.stringify(er));
+        util.puts('Created new db.');
+      });
+
+    db
       .saveDoc('my-doc', {awesome: 'couch fun'}, function(er, ok) {
         if (er) throw new Error(JSON.stringify(er));
         util.puts('Saved my first doc to the couch!');

@@ -60,6 +60,6 @@ db.saveAttachment(
     })
   });
 
-process.addListener('exit', function() {
+process.on('exit', function() {
   checkCallbacks(callbacks);
 });

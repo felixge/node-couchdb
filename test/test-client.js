@@ -118,6 +118,6 @@ client2
 db.remove();
 db2.remove();
 
-process.addListener('exit', function() {
+process.on('exit', function() {
   checkCallbacks(callbacks);
 });
