@@ -41,6 +41,6 @@ db.changes({since: 1}, function(er, r) {
   assert.equal(1, r.results.length);
 });
 
-process.addListener('exit', function() {
+process.on('exit', function() {
   checkCallbacks(callbacks);
 });
