@@ -287,6 +287,6 @@ db
     assert.equal(1, r.rows.length);
   });
 
-process.addListener('exit', function() {
+process.on('exit', function() {
   checkCallbacks(callbacks);
 });

@@ -25,7 +25,7 @@ client
   });
 
 client
-  .request('get', '/_uuids', {count: 3}, function(er, r) {
+  .request('GET', '/_uuids', {count: 3}, function(er, r) {
     if (er) throw new Error(JSON.stringify(er));
     callbacks.C = true;
     assert.ok(3, r.uuids.length);
@@ -59,6 +59,6 @@ client
     assert.equal('method_not_allowed', r.error);
   });
 
-process.addListener('exit', function() {
+process.on('exit', function() {
   checkCallbacks(callbacks);
 });
