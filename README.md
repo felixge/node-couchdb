@@ -207,6 +207,22 @@ Wrapper for [DELETE /db-name](http://wiki.apache.org/couchdb/HTTP_database_API#D
 
 Wrapper for [GET /db-name/doc-id\[?rev=\]\[&attachments=\]](http://wiki.apache.org/couchdb/HTTP_Document_API#GET). Fetches a document with a given `id` and optional `rev` and/or `attachments` from the database.
 
+### db.getDocs(keys/startkey, [endkey])
+
+Fetches multiple documents using [/\_all\_docs](http://wiki.apache.org/couchdb/HTTP_Bulk_Document_API#Fetch_Multiple_Documents_With_a_Single_Request).
+
+Example:
+
+    db.getDocs(['aa', 'bb', 'cc'], function (er, r) {
+      if (er) throw new Error(JSON.stringify(er));
+      // r => {"total_rows":10,"offset":2,"rows":[{...}]}
+      });
+
+    db.getDocs('aa', 'cc', function (er, r) {
+      if (er) throw new Error(JSON.stringify(er));
+      // r => {"total_rows":10,"offset":2,"rows":[{...}]}
+      });
+
 ### db.saveDoc(id, doc)
 
 Wrapper for [PUT /db-name/doc-id](http://wiki.apache.org/couchdb/HTTP_Document_API#PUT). Saves a json `doc` with a given `id`.
