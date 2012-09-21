@@ -97,7 +97,7 @@ Takes the path of a `file` and callback receives a JS object suitable for inline
 
 Check `lib/dep/mime.js` for a list of recognized file types.
 
-### couchdb.createClient([port, host, user, pass, maxListeners])
+### couchdb.createClient([port, host, user, pass, maxListeners, secure])
 
 Creates a new `couchdb.Client` for a given `port` (default: `5984`) and `host` (default: `'localhost'`). This client will queue all requests that are send through it, so ordering of requests is always guaranteed. Use multiple clients for parallel operations.
 
@@ -106,6 +106,10 @@ If the optional `user` and `pass` arguments are supplied, all requests will be m
 If the optional `maxListeners` is supplied - module uses emitter.setMaxListeners method. It may be usefull if you use many couchdb requests and don't want to see warnings.
 Default Node.js value for this == 11 listeners; if `maxListeners` == 0 then warnings are off.
 
+If the optional `secure` is supplied as true, then the https transport is used. Note that https is usually serviced on port 443. This is useful when using cloud-based CouchDB services such as Cloudant where their API is hosted on a https platform e.g.
+
+      client = couchdb.createClient(443, 'username.cloudant.com','username','password',0,true),
+      
 ### client.host
 
 The host this client is connecting to. READ-ONLY property
