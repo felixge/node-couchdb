@@ -103,7 +103,7 @@ Creates a new `couchdb.Client` for a given `port` (default: `5984`) and `host` (
 
 If the optional `user` and `pass` arguments are supplied, all requests will be made with HTTP Basic Authorization
 
-If the optional `maxListeners` is supplied - module uses emitter.setMaxListeners method. It may be usefull if you use many couchdb requests and don't want to see warnings.
+If the optional `maxListeners` is supplied - module uses emitter.setMaxListeners method. It may be useful if you use many couchdb requests and don't want to see warnings.
 Default Node.js value for this == 11 listeners; if `maxListeners` == 0 then warnings are off.
 
 If the optional `secure` is supplied as true, then the https transport is used. Note that https is usually serviced on port 443. This is useful when using cloud-based CouchDB services such as Cloudant where their API is hosted on a https platform e.g.
